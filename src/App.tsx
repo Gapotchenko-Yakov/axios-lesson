@@ -5,7 +5,7 @@ import { getPosts } from "./api/requests";
 
 function App() {
   useEffect(() => {
-    getPosts.then((res) => console.log(res)).catch((err) => console.log(err));
+    getPosts();
   }, []);
 
   return (
