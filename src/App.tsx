@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { getPosts } from "./api/requests";
+import { createPost, getPosts } from "./api/requests";
 
 function App() {
   useEffect(() => {
     getPosts();
+    createPost({ body: "asd", title: "Post title" });
   }, []);
 
   return (
