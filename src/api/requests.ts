@@ -3,13 +3,17 @@ import axios from "axios";
 const FIRST_API_URL = "https://jsonplaceholder.typicode.com";
 const SECOND_API_URL = "https://fakerapi.it/api/v1";
 
+axios.defaults.baseURL = FIRST_API_URL;
+axios.defaults.headers.common = {
+  Authorization: `Bearer ${localStorage.getItem("token")}`,
+};
+axios.defaults.withCredentials = true;
+
 export const getPosts = async () => {
   try {
-    const res = await axios.get(`${FIRST_API_URL}/posts`, {
+    const res = await axios.get(`/posts`, {
       params: { offset: 0, limit: 10 },
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+
       onDownloadProgress: function (progressEvent) {
         console.log("progressEvent", progressEvent);
       },
@@ -28,10 +32,7 @@ export const getPosts = async () => {
 
 export const createPost = async (post: any) => {
   try {
-    const res = await axios.post(`${FIRST_API_URL}/posts`, post, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+    const res = await axios.post(`/posts`, post, {
       params: {
         offset: 0,
       },
