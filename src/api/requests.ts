@@ -66,3 +66,10 @@ firstApiAxios.interceptors.response.use(
     }
   }
 );
+
+firstApiAxios.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (error) => {}
+);
