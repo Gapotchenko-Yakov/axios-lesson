@@ -20,39 +20,21 @@ const secondApiAxios = axios.create({
 });
 
 export const getPosts = async () => {
-  try {
-    const res = await firstApiAxios.get("/posts", {
-      params: { offset: 0, limit: 10 },
-    });
+  const res = await firstApiAxios.get("/posts", {
+    params: { offset: 0, limit: 10 },
+  });
 
-    return res;
-  } catch (err) {
-    if (axios.isAxiosError(err)) {
-      console.log("error", err.response?.data.errText);
-      console.log("error", err.message);
-    } else if (err instanceof Error) {
-      console.log(err.message);
-    }
-  }
+  return res;
 };
 
 export const createPost = async (post: any) => {
-  try {
-    const res = await firstApiAxios.post("/posts", post, {
-      params: {
-        offset: 0,
-      },
-    });
+  const res = await firstApiAxios.post("/posts", post, {
+    params: {
+      offset: 0,
+    },
+  });
 
-    return res;
-  } catch (err) {
-    if (axios.isAxiosError(err)) {
-      console.log("err.response?.data.errText", err.response?.data.errText);
-      console.log("err.message", err.message);
-    } else if (err instanceof Error) {
-      console.log("err.message", err.message);
-    }
-  }
+  return res;
 };
 
 export const getImages = async () => {
@@ -69,3 +51,18 @@ export const getImages = async () => {
     }
   }
 };
+
+firstApiAxios.interceptors.response.use(
+  (res) => {
+    console.log(res.status, "int res");
+    return res;
+  },
+  (err) => {
+    if (axios.isAxiosError(err)) {
+      console.log("error", err.response?.data.errText);
+      console.log("error", err.message);
+    } else if (err instanceof Error) {
+      console.log(err.message);
+    }
+  }
+);
