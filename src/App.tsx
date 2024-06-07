@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { createPost, getImages, getPosts } from "./api/requests";
+import {
+  createPost,
+  getImages,
+  getPosts,
+  getPostsController,
+} from "./api/requests";
 
 function App() {
   useEffect(() => {
     getPosts();
+    getPostsController.abort();
     createPost({ body: "asd", title: "Post title" });
-    getImages();
+    // getImages();
   }, []);
 
   return (
